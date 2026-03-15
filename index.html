@@ -3,36 +3,772 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avasy Inc.</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Avasy Inc. — Software That Solves</title>
+<meta name="description" content="Avasy Inc. builds software platforms and applications that solve real-world problems. Based in Ontario, Canada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; min-height: 100vh; background: #0a0a0a; color: #f0ede8; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px; text-align: center; }
-.logo { width: 44px; height: 44px; border-radius: 10px; background: #fff; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 32px; }
-.company { font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,237,232,0.4); margin-bottom: 20px; font-weight: 400; }
-h1 { font-size: clamp(28px,5vw,48px); font-weight: 300; line-height: 1.2; max-width: 560px; margin: 0 auto 24px; letter-spacing: -0.02em; }
-.sub { font-size: 16px; color: rgba(240,237,232,0.45); max-width: 380px; margin: 0 auto 48px; line-height: 1.7; font-weight: 300; }
-.divider { width: 1px; height: 40px; background: rgba(240,237,232,0.15); margin: 0 auto 48px; }
-.meta { font-size: 13px; color: rgba(240,237,232,0.3); letter-spacing: 0.06em; line-height: 2.4; }
-.meta a { color: rgba(240,237,232,0.45); text-decoration: none; }
+:root {
+  --navy: #050d1a;
+  --navy-mid: #0a1628;
+  --navy-light: #0f2040;
+  --blue: #1a3a6e;
+  --blue-bright: #2d6cdf;
+  --blue-glow: #4d8fff;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --white: #f0eee8;
+  --white-dim: rgba(240,238,232,0.6);
+  --white-ghost: rgba(240,238,232,0.12);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ── Grain overlay ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* ── Nav ── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 24px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(5,13,26,0.95) 0%, transparent 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--white); }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(29,69,138,0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(13,37,80,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 80% 60%, rgba(45,108,223,0.12) 0%, transparent 50%);
+}
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(45,108,223,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,108,223,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s ease forwards;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 8vw, 110px);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  max-width: 900px;
+  margin: 0 auto 12px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.35s ease forwards;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+.hero-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--white-dim);
+  max-width: 480px;
+  margin: 24px auto 56px;
+  line-height: 1.75;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.5s ease forwards;
+}
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.65s ease forwards;
+}
+.btn {
+  display: inline-block;
+  padding: 14px 36px;
+  border-radius: 2px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--blue-bright);
+  color: var(--white);
+  border: 1px solid var(--blue-bright);
+}
+.btn-primary:hover {
+  background: var(--blue-glow);
+  border-color: var(--blue-glow);
+  transform: translateY(-1px);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--white-dim);
+  border: 1px solid rgba(240,238,232,0.2);
+}
+.btn-outline:hover {
+  border-color: rgba(240,238,232,0.5);
+  color: var(--white);
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 0.8s 1s ease forwards;
+}
+.hero-scroll span {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240,238,232,0.25);
+}
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(180deg, rgba(201,168,76,0.6), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* ── Section shared ── */
+section { position: relative; }
+.section-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+/* ── About ── */
+.about {
+  padding: 140px 0;
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+.about-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+.about-text h2 em { font-style: italic; color: var(--gold-light); }
+.about-text p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--white-dim);
+  margin-bottom: 16px;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.stat {
+  background: var(--white-ghost);
+  padding: 32px 28px;
+  border: 1px solid rgba(45,108,223,0.12);
+}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--gold-light);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+}
+
+/* ── Products ── */
+.products {
+  padding: 140px 0;
+  background: var(--navy-mid);
+}
+.products-header {
+  margin-bottom: 80px;
+}
+.products-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  max-width: 500px;
+}
+.products-header h2 em { font-style: italic; color: var(--gold-light); }
+
+/* Product cards */
+.product-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 560px;
+  margin-bottom: 3px;
+  border: 1px solid rgba(45,108,223,0.1);
+  overflow: hidden;
+  transition: border-color 0.4s;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.product-card:hover { border-color: rgba(45,108,223,0.35); }
+.product-card.reverse { direction: rtl; }
+.product-card.reverse > * { direction: ltr; }
+
+.product-visual {
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+}
+.product-visual-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* SetuSphere visual */
+.visual-setu {
+  background: linear-gradient(135deg, #0a1628 0%, #0d2244 50%, #102a50 100%);
+}
+.visual-setu .orb {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(45,108,223,0.5), rgba(13,34,80,0.8));
+  border: 1px solid rgba(45,108,223,0.3);
+  position: relative;
+  animation: orbitSlow 12s linear infinite;
+}
+.visual-setu .orb::before {
+  content: '';
+  position: absolute;
+  inset: -24px;
+  border-radius: 50%;
+  border: 1px solid rgba(45,108,223,0.12);
+}
+.visual-setu .orb::after {
+  content: '';
+  position: absolute;
+  inset: -52px;
+  border-radius: 50%;
+  border: 1px solid rgba(45,108,223,0.07);
+}
+.orb-label {
+  position: absolute;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: rgba(77,143,255,0.9);
+  letter-spacing: 0.1em;
+}
+/* Auxia visual */
+.visual-auxia {
+  background: linear-gradient(135deg, #060e0a 0%, #0a1f12 50%, #0d2618 100%);
+}
+.visual-auxia .rings {
+  position: relative;
+  width: 260px;
+  height: 260px;
+}
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.ring-1 { width: 80px; height: 80px; border-color: rgba(91,168,144,0.8); animation: pulse 3s ease-in-out infinite; }
+.ring-2 { width: 140px; height: 140px; border-color: rgba(91,168,144,0.4); animation: pulse 3s 0.5s ease-in-out infinite; }
+.ring-3 { width: 200px; height: 200px; border-color: rgba(91,168,144,0.2); animation: pulse 3s 1s ease-in-out infinite; }
+.ring-4 { width: 260px; height: 260px; border-color: rgba(91,168,144,0.1); animation: pulse 3s 1.5s ease-in-out infinite; }
+.ring-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #5ba890;
+  box-shadow: 0 0 24px rgba(91,168,144,0.6);
+}
+
+.product-content {
+  padding: 64px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--navy-light);
+  transition: background 0.4s;
+}
+.product-card:hover .product-content { background: #132840; }
+.product-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.tag-dot.green { background: #5ba890; }
+.product-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 4vw, 64px);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.product-tagline {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--gold-light);
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+.product-desc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--white-dim);
+  margin-bottom: 40px;
+  max-width: 380px;
+}
+.product-features {
+  list-style: none;
+  margin-bottom: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.product-features li {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--white-dim);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.product-features li::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.product-features li.green::before { background: #5ba890; }
+.product-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,168,76,0.3);
+  padding-bottom: 8px;
+  transition: all 0.3s;
+  align-self: flex-start;
+}
+.product-link.green-link { color: #5ba890; border-color: rgba(91,168,144,0.3); }
+.product-link:hover { gap: 20px; }
+.product-link.green-link:hover { border-color: rgba(91,168,144,0.7); }
+.product-link svg { transition: transform 0.3s; }
+.product-link:hover svg { transform: translateX(4px); }
+
+/* ── Footer ── */
+footer {
+  padding: 80px 0 48px;
+  background: var(--navy);
+  border-top: 1px solid rgba(45,108,223,0.08);
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.footer-brand span { color: var(--gold); }
+.footer-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(240,238,232,0.2);
+  text-transform: uppercase;
+}
+.footer-right {
+  text-align: right;
+}
+.footer-contact {
+  font-size: 14px;
+  color: var(--white-dim);
+  margin-bottom: 8px;
+}
+.footer-contact a {
+  color: var(--gold-light);
+  text-decoration: none;
+}
+.footer-location {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(240,238,232,0.25);
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+@keyframes orbitSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%,-50%) scale(1.04); }
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.35s; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  .section-inner { padding: 0 24px; }
+  .about-grid { grid-template-columns: 1fr; gap: 60px; }
+  .product-card { grid-template-columns: 1fr; }
+  .product-card.reverse { direction: ltr; }
+  .product-visual { min-height: 320px; }
+  .product-content { padding: 48px 32px; }
+  .footer-inner { flex-direction: column; gap: 40px; align-items: flex-start; }
+  .footer-right { text-align: left; }
+}
 </style>
 </head>
 <body>
-<div class="logo">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <rect x="3" y="3" width="8" height="8" rx="2" fill="#0a0a0a"/>
-    <rect x="13" y="3" width="8" height="8" rx="2" fill="#0a0a0a"/>
-    <rect x="3" y="13" width="8" height="8" rx="2" fill="#0a0a0a"/>
-    <rect x="13" y="13" width="8" height="8" rx="2" fill="#0a0a0a"/>
-  </svg>
-</div>
-<p class="company">Avasy Inc.</p>
-<h1>Building thoughtful digital products.</h1>
-<p class="sub">A technology company based in Ontario, Canada.</p>
-<div class="divider"></div>
-<div class="meta">
-  Ontario, Canada &nbsp;·&nbsp; Incorporated 2025<br>
-  <a href="mailto:nav@avasy.com">contact@avasy.ca</a>
-</div>
+
+<!-- Nav -->
+<nav>
+  <a href="/" class="nav-logo">Av<span>a</span>sy</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <p class="hero-eyebrow">Avasy Inc. &nbsp;·&nbsp; Ontario, Canada</p>
+  <h1>Software that <em>solves</em><br>real problems.</h1>
+  <p class="hero-sub">We build applications and platforms that address genuine human needs — thoughtfully designed, intelligently built.</p>
+  <div class="hero-cta">
+    <a href="#products" class="btn btn-primary">Our Products</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="section-label">About</p>
+        <h2>Built on the belief that <em>technology should serve people.</em></h2>
+        <p>Avasy is an independent software company based in Ontario, Canada. We identify unsolved problems in complex, high-stakes domains and build elegant, intelligent solutions for them.</p>
+        <p>Every product we create starts with a real human need — not a technology looking for a use case. We combine thoughtful product design with modern AI to deliver software people actually want to use.</p>
+      </div>
+      <div class="about-stats reveal reveal-delay-2">
+        <div class="stat">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Products in market</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">AI</div>
+          <div class="stat-label">Powered at the core</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">CA</div>
+          <div class="stat-label">Ontario incorporated</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Problems left to solve</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section class="products" id="products">
+  <div class="section-inner">
+    <div class="products-header reveal">
+      <p class="section-label">Products</p>
+      <h2>Two platforms.<br><em>One mission.</em></h2>
+    </div>
+  </div>
+
+  <!-- SetuSphere -->
+  <div class="section-inner" style="padding-left:48px;padding-right:48px; max-width:1200px; margin:0 auto;">
+    <a href="https://setusphere.com?utm_source=avasy.ca&utm_medium=referral&utm_campaign=avasy_site" class="product-card reveal" target="_blank" rel="noopener">
+      <div class="product-visual visual-setu">
+        <div class="product-visual-inner">
+          <div class="orb">
+            <span class="orb-label">SS</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-content">
+        <p class="product-tag"><span class="tag-dot"></span> Enterprise Platform</p>
+        <h3 class="product-name">Setu<br>Sphere</h3>
+        <p class="product-tagline">Private AI-moderated peer intelligence</p>
+        <p class="product-desc">A secure, AI-powered platform for enterprise project management professionals to share intelligence, validate decisions, and grow together — without the noise of public networks.</p>
+        <ul class="product-features">
+          <li>AI content moderation and curation</li>
+          <li>Private PMO peer communities</li>
+          <li>Enterprise delivery intelligence</li>
+          <li>Structured knowledge exchange</li>
+        </ul>
+        <span class="product-link">
+          Visit SetuSphere
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>
+  </div>
+
+  <div style="height: 3px;"></div>
+
+  <!-- Auxia -->
+  <div class="section-inner" style="padding-left:48px;padding-right:48px; max-width:1200px; margin:0 auto;">
+    <a href="auxia.html" class="product-card reverse reveal">
+      <div class="product-visual visual-auxia">
+        <div class="product-visual-inner">
+          <div class="rings">
+            <div class="ring ring-4"></div>
+            <div class="ring ring-3"></div>
+            <div class="ring ring-2"></div>
+            <div class="ring ring-1"></div>
+            <div class="ring-dot"></div>
+          </div>
+        </div>
+      </div>
+      <div class="product-content">
+        <p class="product-tag"><span class="tag-dot green"></span> Consumer App &nbsp;·&nbsp; iOS</p>
+        <h3 class="product-name">Auxia</h3>
+        <p class="product-tagline" style="color:#5ba890;">Daily brain health in 90 seconds</p>
+        <p class="product-desc">An AI-powered cognitive training app for adults 40+ that adapts to your brain daily — helping build the cognitive reserve that research suggests may reduce dementia risk.</p>
+        <ul class="product-features">
+          <li class="green">12-game adaptive training system</li>
+          <li class="green">AI mood & sleep check-ins</li>
+          <li class="green">Monthly health report for your GP</li>
+          <li class="green">Family sharing included</li>
+        </ul>
+        <span class="product-link green-link">
+          Learn about Auxia
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" style="padding: 140px 0; background: var(--navy);">
+  <div class="section-inner">
+    <div style="max-width: 640px;">
+      <p class="section-label reveal">Contact</p>
+      <h2 class="reveal" style="font-family:'Cormorant Garamond',serif; font-size:clamp(36px,4vw,56px); font-weight:300; line-height:1.15; margin-bottom:24px; letter-spacing:-0.01em;">
+        Have a question<br>or want to <em style="font-style:italic;color:var(--gold-light);">work together?</em>
+      </h2>
+      <p class="reveal" style="font-size:16px; line-height:1.85; color:var(--white-dim); margin-bottom:52px; max-width:420px;">
+        We're a small team and we read every message. Whether it's about our products, a partnership, or just to say hello — reach out directly.
+      </p>
+      <!-- Email display -->
+      <div class="reveal" style="display:inline-flex; align-items:center; gap:20px; background:var(--white-ghost); border:1px solid rgba(45,108,223,0.2); border-radius:3px; padding:24px 36px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:rgba(45,108,223,0.15); border:1px solid rgba(45,108,223,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" stroke="rgba(77,143,255,0.8)" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="rgba(77,143,255,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--white-dim); margin-bottom:6px;">Email us</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:400; color:var(--gold-light); letter-spacing:0.02em;">contact@avasy.ca</div>
+        </div>
+      </div>
+      <p class="reveal" style="margin-top:20px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.14em; color:rgba(240,238,232,0.2); text-transform:uppercase;">
+        We typically respond within 1–2 business days
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Av<span>a</span>sy</div>
+      <div class="footer-copy">© 2025 Avasy Inc. &nbsp;·&nbsp; Ontario, Canada &nbsp;·&nbsp; All rights reserved</div>
+    </div>
+    <div class="footer-right">
+      <p class="footer-location">Built in Ontario &nbsp;·&nbsp; Shipping globally</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
