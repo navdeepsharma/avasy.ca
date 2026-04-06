@@ -741,7 +741,7 @@ footer {
         </div>
         <div>
           <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--white-dim); margin-bottom:6px;">Email us</div>
-          <div style="font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:400; color:var(--gold-light); letter-spacing:0.02em;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e2818d8c96838196a2839483919bcc8183">[email&#160;protected]</a></div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:400; color:var(--gold-light); letter-spacing:0.02em;">contact@avasy.ca</div>
         </div>
       </div>
       <p class="reveal" style="margin-top:20px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.14em; color:rgba(240,238,232,0.2); text-transform:uppercase;">
@@ -765,5 +765,11 @@ footer {
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const observer = new IntersectionObserve
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
